@@ -17,7 +17,7 @@ import { useState } from "react";
 
 function Header() {
   
-  const [MenuCategory, setMenuCategory] = React.useState([]);
+  const [menuCategory, setMenuCategory] = React.useState([]);
 
  useEffect(() => {
   getMenuCategory();
@@ -31,7 +31,7 @@ function Header() {
 }
 
   return (
-    <div className="flex p-2 justify-between items-center">
+    <div className="flex p-2 gap-10 justify-between items-center">
       <div>
         <Image
           src="/images/logo.avif"
@@ -40,41 +40,51 @@ function Header() {
           height={65}
         />
       </div>
-      <div className='hidden md:flex gap-2 items-center'>
+      <div className='hidden md:flex gap-5 items-center'>
        
         <DropdownMenu>
   <DropdownMenuTrigger asChild>
-  <h2 className='flex gap-2 items-center border rounded-full p-2 px-10 bg-blue-400'>
+  <h2 className='flex gap-5 items-center border rounded-full p-2 px-10 bg-blue-400'>
           <LayoutGrid className='h-5 w-5' />
           Categories
         </h2>
   </DropdownMenuTrigger>
   <DropdownMenuContent>
-    <DropdownMenuLabel>Product Categories</DropdownMenuLabel>
+    <DropdownMenuLabel>Product Category</DropdownMenuLabel>
     <DropdownMenuSeparator />
-    {MenuCategory.map((category,index) => (
-    <DropdownMenuItem key={index}>{MenuCategory.name}</DropdownMenuItem>))}
+    {menuCategory.map((Category,index) => (
+    <DropdownMenuItem key={index}>
+
+    <Image
+    src={
+      process.env.NEXT_PUBLIC_BACKEND_BASE_URL + Category.icon.url
+    }
+    alt='logo'
+    width={30}
+    height={30}
+    />
+    <h2>{Category.name}</h2>
+    </DropdownMenuItem>))}
     
     
   </DropdownMenuContent>
 </DropdownMenu>
 
       </div>
-      <div className='hidden md:flex gap-2 items-center'>
+      <div className="hidden md:flex gap-5 items-center">
         <Search />
         <input
-          type='text'
-          placeholder='Search for products'
-          className='border-2 border-gray-300 rounded-lg p-2'
+          type="text"
+          placeholder="Search for products"
+          className="border-2 border-teal-500 rounded-lg p-2"
         />
       </div>
-      <div className='flex gap-2 items-center ml-auto'>
+      <div className="flex gap-5 items-center ml-auto">
         <h2>
-          <ShoppingBagIcon className="h-5 w-5" />
+          <ShoppingBagIcon className="h-5 w-5" /> 0
         </h2>
-        <Button className="bg-gradient-to-r from-teal-400 to-blue-500 hover:from">
-          <LogInIcon />
-          LogIn
+        <Button className="bg-gradient-to-r from-teal-700 to-teal-500 hover:from-emerald-400 hover:to-teal-800">
+          <LogInIcon /> Log in
         </Button>
       </div>
     </div>

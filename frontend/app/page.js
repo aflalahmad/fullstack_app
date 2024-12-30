@@ -1,10 +1,14 @@
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { LogInIcon } from "lucide-react";
+import Slider from "./_components/Slider";
+import CategoryList from "./_components/CategoryList";
+
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-    <h1>Full stack development with Aflal</h1>
-    <Button><LogInIcon />Log in</Button>
+    <div>
+     <Slider />
+     <CategoryList />
     </div>
   );
 }
