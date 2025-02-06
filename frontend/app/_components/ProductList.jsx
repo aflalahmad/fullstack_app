@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import GlobalApi from '../_utilities/GlobalApi'
-import Image from 'next/image';
+import Image from "next/image";
 import { Button } from '@/components/ui/button';
 import { Bookmark, Heart, ShoppingBag } from 'lucide-react';
 
@@ -20,44 +20,43 @@ function ProductList() {
     };
 
     return (
-        <div>
-            <h2 className=" category m-5 mb-5 gap-4 text-bold text-emerald-950 text-3xl font-bold items-center">Product List</h2>
-            <div className='grid grid-cols-5 gap-4'>
+        <div className="max-w-7xl mx-auto px-4 py-8">
+            <h2 className="category mb-6 text-3xl font-semibold text-teal-800">Product List</h2>
+            <div className="flex overflow-x-auto gap-8">
                 {productList.map((product, index) => (
-                    <div key={index}
-                        className='p-3 flex flex-col items-center gap-4 border-gray-300 rounded-lg'>
+                    <div key={index} className="flex-none w-64 bg-white border rounded-lg shadow-md p-4 transition-transform duration-300 hover:scale-105">
                         <Image
-                            src={process.env.NEXT_PUBLIC_BACKEND_BASE_URL + product.image.url}
-                            alt='Trending item'
-                            width={130}
-                            height={100}
-                            className='h-{200px} w-{450px} hover:scale-125 transition-all ease-in-out duration-500 rounded-lg'
+                            src={process.env.NEXT_PUBLIC_BACKEND_BASE_URL + product.image[0].url}
+                            alt={product.name}
+                            width={200}
+                            height={200}
+                            className="w-full h-48 object-cover rounded-lg mb-4 transition-transform duration-300 hover:scale-105"
                         />
-
-                        <h2 className='text-teal-700'>{product.name}</h2>
-                        {product.mrp && product.sellingprice !== 0 ? (
-                            <>
-                                <h2 className='font-bold line-through text-red-600'>{product.mrp}</h2>
-                                <h2 className='text-teal-700'>{product.sellingprice}</h2>
-                            </>
-                        ) : (
-                            <h2 className='text-teal-700'>{product.mrp}</h2>
-                        )}
-
-                        <div>
+                        <h3 className="text-xl font-semibold text-teal-700 mb-2">{product.name}</h3>
+                        <div className="flex flex-col items-center">
+                            {product.mrp && product.sellingprice !== 0 ? (
+                                <>
+                                    <span className="text-sm font-medium text-gray-500 line-through mb-2">₹{product.mrp}</span>
+                                    <span className="text-xl font-bold text-teal-800">₹{product.sellingprice}</span>
+                                </>
+                            ) : (
+                                <span className="text-xl font-bold text-teal-800">₹{product.mrp}</span>
+                            )}
+                        </div>
+                        <div className="text-sm text-gray-500 mt-2">
                             {product.categories.map((category, CatIndex) => (
-                                <h2 key={CatIndex}>{category.name}</h2>
+                                <span key={CatIndex} className="block">{category.name}</span>
                             ))}
                         </div>
-                        <div>
-                            <Button variant='outline'>
+                        <div className="flex gap-4 mt-4">
+                            <Button variant="outline" className="p-2 text-teal-700 border-teal-700 hover:bg-teal-700 hover:text-white transition-colors duration-300">
                                 <Bookmark />
                             </Button>
-                            <Button className='bg-teal-800 text-white'>
+                            <Button className="bg-teal-800 text-white p-2 hover:bg-teal-700 transition-colors duration-300">
                                 <ShoppingBag />
-                                Add to Cart
+                                <span className="ml-2">Add to Cart</span>
                             </Button>
-                            <Button variant='outline'>
+                            <Button variant="outline" className="p-2 text-teal-700 border-teal-700 hover:bg-teal-700 hover:text-white transition-colors duration-300">
                                 <Heart />
                             </Button>
                         </div>
@@ -68,4 +67,4 @@ function ProductList() {
     );
 }
 
-export default ProductList
+export default ProductList;

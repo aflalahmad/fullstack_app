@@ -7,4 +7,5 @@ const axiosClient = axios.create({
 const getMenuCategory = () => axiosClient.get('/categories?populate=*');
 const getProductList = () => axiosClient.get('/products?populate=*');
 
-export default { getMenuCategory};
+export default { getMenuCategory, getProductList};
+
