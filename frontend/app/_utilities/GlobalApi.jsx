@@ -7,5 +7,11 @@ const axiosClient = axios.create({
 const getMenuCategory = () => axiosClient.get('/categories?populate=*');
 const getProductList = () => axiosClient.get('/products?populate=*');
 
-export default { getMenuCategory, getProductList};
+
+const getProductByCategory=(category)=>axiosClient.get('/products??filters[categories][name][$in]='+category+"&populate=*")
+.then(resp=>{
+    return resp.data.data;
+})
+
+export default { getMenuCategory, getProductList,getProductByCategory};
 

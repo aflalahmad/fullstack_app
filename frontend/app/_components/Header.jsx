@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import GlobalApi from "../_utilities/GlobalApi";
 import { useState, use } from "react";
+import Link from "next/link";
 
 
 function Header() {
@@ -53,6 +54,7 @@ function Header() {
     <DropdownMenuLabel>Product Category</DropdownMenuLabel>
     <DropdownMenuSeparator />
     {menuCategory.map((Category,index) => (
+      <Link href={"/products-category/" + Category.name}>
     <DropdownMenuItem key={index}>
 
     <Image
@@ -64,7 +66,10 @@ function Header() {
     height={30}
     />
     <h2>{Category.name}</h2>
-    </DropdownMenuItem>))}
+    </DropdownMenuItem>
+    </Link>
+
+    ))}
     
     
   </DropdownMenuContent>

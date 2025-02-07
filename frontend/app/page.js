@@ -6,7 +6,9 @@ import CategoryList from "./_components/CategoryList";
 import ProductList from "./_components/ProductList";
 import Banner from "./_components/Banner";
 
-export default function Home() {
+export default async function Home() {
+
+  
   return (
     <div>
      <Slider />
