@@ -3,14 +3,17 @@ import React from 'react'
 
 function Banner() {
     return (
-        <div className='mt-10'>
-            <div>
+        <div className="relative w-full">
+           
+            {/* Image Section */}
+            <div className="overflow-hidden">
                 <Image
-                src="/images/banner.jpg"
-                alt="banner"
-                width={1000}
-                height={500}
-                className='w-full h-[500px] object-cover'
+                    src="/images/9.jpg"
+                    alt="banner"
+                    width={920}
+                    height={600}
+                    objectFit="cover"
+                    className="w-full h-[400px] md:h-[500px] lg:h-[500px]"
                 />
             </div>
         </div>
