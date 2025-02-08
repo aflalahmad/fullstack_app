@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect } from "react";
 import Image from "next/image";
-import { LayoutGrid, LogInIcon, Search, ShoppingBagIcon } from "lucide-react";
+import { CircleUserRound, LayoutGrid, LogInIcon, Search, ShoppingBagIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -14,11 +14,14 @@ import {
 import GlobalApi from "../_utilities/GlobalApi";
 import { useState, use } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 
 function Header() {
   
   const [menuCategory, setMenuCategory] = React.useState([]);
+  const isLogin=sessionStorage.getItem('jwt')?true:false
+  const router=useRouter();
 
  useEffect(() => {
   getMenuCategory();
@@ -29,6 +32,10 @@ function Header() {
       console.log('List',response.data.data);
       setMenuCategory(response.data.data);
   });
+}
+const onSignOut=()=>{
+  sessionStorage.clear();
+  router.push('/sign-in')
 }
 
   return (
@@ -54,7 +61,7 @@ function Header() {
     <DropdownMenuLabel>Product Category</DropdownMenuLabel>
     <DropdownMenuSeparator />
     {menuCategory.map((Category,index) => (
-      <Link href={"/products-category/" + Category.name}>
+      <Link key={index} href={"/products-category/" + Category.name}>
     <DropdownMenuItem key={index}>
 
     <Image
@@ -88,9 +95,30 @@ function Header() {
         <h2>
           <ShoppingBagIcon className="h-5 w-5" /> 0
         </h2>
-        <Button className="bg-gradient-to-r from-teal-700 to-teal-500 hover:from-emerald-400 hover:to-teal-800">
-          <LogInIcon /> Log in
+        {!isLogin? <Link href={'/sign-in'}>
+        <Button >
+        Log in   
         </Button>
+        </Link>
+        :
+
+        
+        <DropdownMenu>
+  <DropdownMenuTrigger asChild>
+
+        <CircleUserRound className="bg-green-100 text-primary h-12 w-12 p-2 rounded-full cursor-pointer
+        " />
+        </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuLabel>My Account</DropdownMenuLabel>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem>Profile</DropdownMenuItem>
+    <DropdownMenuItem>My Order</DropdownMenuItem>
+    <DropdownMenuItem onClick={()=>onSignOut()}>Logout</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>
+
+      }
       </div>
     </div>
   );
