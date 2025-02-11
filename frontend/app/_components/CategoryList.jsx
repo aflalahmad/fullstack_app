@@ -1,12 +1,11 @@
-'use client'
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import GlobalApi from "../_utilities/GlobalApi";
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 function CategoryList() {
-  const [CategoryList, setMenuCategory] = React.useState([]);
+  const [CategoryList, setMenuCategory] = useState([]);
 
   useEffect(() => {
     getMenuCategory();
@@ -20,29 +19,30 @@ function CategoryList() {
   };
 
   return (
-    <div className="m-4 gap-8 text-bold text-[#00bcd4] text-3xl font-bold items-center">
-      Product Category
-      <div className="m-4 grid grid-cols-8 md:grid-cols-19 lg:grid-cols-25 gap-8 items-center justify-between">
-        {CategoryList.map((Category, index) => (
-          <Link
-            href={"/products-category/" + Category.name}
-            className="flex flex-col items-center rounded-lg gap-2 mt-2 group border shadow cursor-pointer hover:bg-[#00bcd4] bg-[#0098a6] hover:scale-110 transition-all ease-in-out duration-500"
-            key={index}
-          >
-            <div>
+    <div className="m-6 text-center">
+      <h2 className="text-4xl font-bold text-[#3a4344] mb-6">Product Categories</h2>
+      
+      <div className="flex justify-center">
+        <div className="inline-flex gap-x-6 bg-[#f0f0f0] px-8 py-6 rounded-lg shadow-lg w-fit">
+          {CategoryList.map((Category, index) => (
+            <Link
+              href={`/products-category/${Category.name}`}
+              key={index}
+              className="flex flex-col items-center p-6 rounded-lg shadow-lg cursor-pointer bg-[#cce5ff] hover:bg-[#0077b6] transition-all duration-300 transform hover:scale-110 min-w-[140px]"
+            >
               <Image
                 src={process.env.NEXT_PUBLIC_BACKEND_BASE_URL + Category.icon.url}
-                alt="Category"
-                width={100}  // Adjusted width
-                height={100} // Adjusted height
-                className="rounded-full" // Optional: for rounded image
+                alt={Category.name}
+                width={100}  // Increased size
+                height={100} // Increased size
+                className="rounded-full shadow-md"
               />
-            </div>
-            <h2 className="text-white text-base group-hover:text-white">
-              {Category.name}
-            </h2>
-          </Link>
-        ))}
+              <h3 className="text-lg font-semibold text-gray-800 mt-3 group-hover:text-white">
+                {Category.name}
+              </h3>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );

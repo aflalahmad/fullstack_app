@@ -6,6 +6,8 @@ import Header from "./_components/Header";
 import Footer from "./_components/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
+import { UpdateCartContext } from "./_context/UpdateCartContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,15 +26,20 @@ const geistMono = Geist_Mono({
 
 export default function RootLayout({ children }) {
   const params =usePathname();
+  const[UpdateCart,setUpdateCart]=useState(false);
   const showHeader=params=='/sign-in'||params=='/create-account'?false:true;
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <UpdateCartContext.Provider value={{UpdateCart,setUpdateCart}}>
         {showHeader&&<Header />}
         {children}
         <Toaster/>
+        <Footer/>
+        </UpdateCartContext.Provider>
+
       </body>
     </html>
   );

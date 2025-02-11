@@ -49,6 +49,12 @@
     },
     "promotion": {
       "type": "boolean"
+    },
+    "user_cart": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::user-cart.user-cart",
+      "inversedBy": "products"
     }
   }
 }

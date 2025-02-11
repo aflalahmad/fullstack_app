@@ -8,7 +8,7 @@ function Banner() {
             {/* Image Section */}
             <div className="overflow-hidden">
                 <Image
-                    src="/images/9.jpg"
+                    src="/images/B1.jpg"
                     alt="banner"
                     width={920}
                     height={600}

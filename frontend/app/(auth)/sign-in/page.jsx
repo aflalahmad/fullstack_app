@@ -10,8 +10,8 @@ import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
 function SignIn() {
-    const {password,setPassword}=useState();
-    const {email,setEmail}=useState();
+    const [password,setPassword]=useState();
+    const [email,setEmail]=useState();
     const router=useRouter();
     const [loader,setLoader]=useState();
 

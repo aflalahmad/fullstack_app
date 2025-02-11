@@ -2,6 +2,7 @@
 import GlobalApi from '@/app/_utilities/GlobalApi'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { LoaderIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -9,11 +10,11 @@ import React, { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
 function CreateAccount() {
-    const {username,setUsername}=useState();
-    const {email,setEmail}=useState();
-    const {password,setPassword}=useState();
+    const [username,setUsername]=useState();
+    const [email,setEmail]=useState();
+    const [password,setPassword]=useState();
     const router=useRouter();
-    const [loader,setLoader]=useState();
+    const [loader,setLoader]=useState(true);
     
 
       useEffect(()=>{
@@ -48,18 +49,16 @@ function CreateAccount() {
         <h2 className='font-bold text-3xl'>Create an Account</h2>
         <h2 className='text-gray-500'>Enter Your Email and Password to Create an Account</h2>
         <div className='w-full flex flex-col gap-5 mt-7'>
-            <Input placeholder='Username'
-            onChange={(e)=>setUsername(e.target.value)}
-            />
-            <Input placeholder='name@example.com'
-            onChange={(e)=>setEmail(e.target.value)}
-            />
+        <Input type='text' placeholder='Username'
+                        onChange={(e) => setUsername(e.target.value)}
+                    />
+            <Input type='text' placeholder='name@gmail.com'
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
             <Input type='password' placeholder='Password'
-             onChange={(e)=>setPassword(e.target.value)}
+             onChange={(e) => setPassword(e.target.value)}
             />
-            <Button onClick={()=>onCreateAccount()}
-                disabled={!(username||email||password)}
-                >{loader?<LoaderIcon className='animate-spin'/>:'Create an Account'}</Button>
+            <Button className='bg-green-500' disabled={!(username || email || password)} onClick={() => onCreateAccount()} >{loader ? <LoaderIcon className='animate-spin' /> : 'Create an Account'}</Button>
             <p>*Already have an Account
                 <Link href={'/sign-in'} className='text-blue-500'>
                 Click here to Sign In

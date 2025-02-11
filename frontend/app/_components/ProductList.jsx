@@ -30,7 +30,7 @@ function ProductList() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
-      <h2 className="category mb-6 text-3xl font-semibold text-teal-800">
+      <h2 className="category mb-6 text-3xl font-semibold text-[#3a4344]">
         Product List
       </h2>
       <div className="flex overflow-x-auto gap-8">

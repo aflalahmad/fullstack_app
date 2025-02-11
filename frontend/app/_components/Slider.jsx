@@ -37,7 +37,7 @@ function Slider() {
               </div>
               <div className="w-full">
                 <img
-                  src="/images/banner1.png"
+                  src="/images/S2.jpg"
                   alt="Banner 1"
                   className="w-full h-[300px] md:h-[400px] object-cover rounded-2xl shadow-lg"
                 />
@@ -66,7 +66,7 @@ function Slider() {
               </div>
               <div className="w-full">
                 <img
-                  src="/images/banner2.jpeg"
+                  src="/images/S3.jpg"
                   alt="Banner 2"
                   className="w-full h-[300px] md:h-[400px] object-cover rounded-2xl shadow-lg"
                 />
@@ -95,7 +95,7 @@ function Slider() {
               </div>
               <div className="w-full">
                 <img
-                  src="/images/banner3.jpg"
+                  src="/images/S1.jpg"
                   alt="Banner 3"
                   className="w-full h-[300px] md:h-[400px] object-cover rounded-2xl shadow-lg"
                 />
