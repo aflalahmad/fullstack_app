@@ -88,13 +88,13 @@ function ProductDetail({ product, isOpen, onClose }) {
                 </div>
 
                 <Button
-          className="flex gap-3 w-full justify-center mt-4 bg-green-600 text-white px-4 py-2 text-lg font-semibold hover:bg-green-700"
-          onClick={addToCart}
-          disabled={loading}
-        >
-          <ShoppingCart />
-          {loading ? <LoaderCircle className="animate-spin" /> : "Add to Cart"}
-        </Button>
+            className="flex gap-3 w-full justify-center bg-green-600 text-white px-4 py-2 text-lg font-semibold rounded-md hover:bg-green-700 transition duration-200"
+            onClick={addToCart}
+            disabled={loading}
+          >
+            <ShoppingCart />
+            {loading ? <LoaderCircle className="animate-spin" /> : "Add to Cart"}
+          </Button>
             </div>
             <h2 className='font-bold text-lg'> <span>Category:</span> {product.name}</h2>
         </div>

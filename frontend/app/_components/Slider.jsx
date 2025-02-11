@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 
 function Slider() {
   return (
-    <div className="hidden sm:grid">
+    <div className="hidden sm:grid px-12 p-10">
       <Carousel>
         <CarouselContent>
           <CarouselItem>

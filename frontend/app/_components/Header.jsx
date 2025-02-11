@@ -60,7 +60,7 @@ function Header() {
   };
 
   return (
-    <div className="flex p-2 gap-10 justify-between items-center">
+    <div className="flex p-2 gap-10 justify-between items-center shadow-2xl">
       <div>
         <Image src="/images/logo.avif" alt="Next.js" width={65} height={65} />
       </div>
