@@ -1,3 +1,5 @@
+import { Item } from '@radix-ui/react-dropdown-menu';
+
 const {default: axios} = require('axios');
 
 const axiosClient = axios.create({
@@ -35,6 +37,16 @@ const getCartItems=(userId,jwt)=>axiosClient.get('user-carts?filters[userId][$eq
         Authorization:'Bearer '+jwt
     }
 }).then(resp=>{
+    const data=resp.data.data;
+    const cardItemList=data.map((Item,index)=>({
+        name:item.attributes.products?.data[0].attributes.name,
+        quantity:item.attributes.quantity,
+        amount:item.attributes.amount,
+        image:item.attributes.products?.data[0].attributes.images.data[0].attributes.url,
+        actualPrice:item.attributes.products?.data[0].attributes.mrp,
+        id:item.id
+    })
+)
     return resp.data.data
 })
 

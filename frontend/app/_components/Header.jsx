@@ -31,6 +31,7 @@ function Header() {
   const { updateCart, setUpdateCart } = useContext(UpdateCartContext);
   const jwt = sessionStorage.getItem("jwt");
   const [totalCartItem, setTotalCartItem] = useState(0);
+  const [cartItemList,setCartItemList]=useState([]);
   const router = useRouter();
 
   useEffect(() => {
@@ -49,9 +50,10 @@ function Header() {
    * used to get total cart items
    */
   const getCartItems = () => {
-    const cartItemList = GlobalApi.getCartItems(user.id, jwt);
-    console.log(cartItemList);
-    setTotalCartItem(cartItemList?.length);
+    const cartItemList_ = GlobalApi.getCartItems(user.id, jwt);
+    console.log(cartItemList_);
+    setTotalCartItem(cartItemList_?.length);
+    setCartItemList(cartItemList_);
   };
 
   const onSignOut = () => {
