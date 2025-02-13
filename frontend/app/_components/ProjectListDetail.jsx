@@ -23,8 +23,10 @@ function ProductDetail({ product, isOpen, onClose }) {
   const router = useRouter();
 
   const addToCart = () => {
+    setLoading(true)
     if (!jwt) {
       router.push("/sign-in");
+      setLoading(false)
       return;
     }
 
@@ -38,16 +40,16 @@ function ProductDetail({ product, isOpen, onClose }) {
         userId:user.id
       },
     };
-
-    GlobalApi.addToCart(data, jwt).then(
-      () => {
-        toast("Added to Cart");
-        setUpdateCart(!updateCart);
-        setLoading(false);
-      },
-      () => {
-        toast("Error while adding to cart");
-        setLoading(false);
+    console.log(data);
+    GlobalApi.addToCart(data, jwt).then(resp=> {
+      console.log(resp);
+      toast("Added to Cart");
+      setUpdateCart(!updateCart);
+      setLoading(false)
+  },
+  (e) => {
+      toast("Error while adding to cart");
+      setLoading(false);
       }
     );
   };
@@ -89,8 +91,7 @@ function ProductDetail({ product, isOpen, onClose }) {
 
                 <Button
             className="flex gap-3 w-full justify-center bg-green-600 text-white px-4 py-2 text-lg font-semibold rounded-md hover:bg-green-700 transition duration-200"
-            onClick={addToCart}
-            disabled={loading}
+            onClick={() => addToCart()} disabled={loading}
           >
             <ShoppingCart />
             {loading ? <LoaderCircle className="animate-spin" /> : "Add to Cart"}

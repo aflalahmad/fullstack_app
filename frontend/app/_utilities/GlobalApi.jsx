@@ -32,23 +32,41 @@ const addToCart=(data,jwt)=>axiosClient.post('/user-carts',data,{
     }
 });
 
+// const getCartItems=(userId,jwt)=>axiosClient.get('user-carts?filters[userId][$eq]='+userId+'&populate=*',{
+//     headers:{
+//         Authorization:'Bearer '+jwt
+//     }
+// }).then(resp=>{
+//     const data=resp.data.data;
+//     const cardItemList=data.map((Item,index)=>({
+//         name:item.attributes.products?.data[0].attributes.name,
+//         quantity:item.attributes.quantity,
+//         amount:item.attributes.amount,
+//         image:item.attributes.products?.data[0].attributes.images.data[0].attributes.url,
+//         actualPrice:item.attributes.products?.data[0].attributes.mrp,
+//         id:item.id
+//     })
+// )
+//     return resp.data.data
+// });
+
 const getCartItems=(userId,jwt)=>axiosClient.get('user-carts?filters[userId][$eq]='+userId+'&populate=*',{
     headers:{
         Authorization:'Bearer '+jwt
     }
 }).then(resp=>{
-    const data=resp.data.data;
-    const cardItemList=data.map((Item,index)=>({
-        name:item.attributes.products?.data[0].attributes.name,
-        quantity:item.attributes.quantity,
-        amount:item.attributes.amount,
-        image:item.attributes.products?.data[0].attributes.images.data[0].attributes.url,
-        actualPrice:item.attributes.products?.data[0].attributes.mrp,
-        id:item.id
-    })
-)
     return resp.data.data
 })
 
-export default { getMenuCategory, getProductList,getProductByCategory,registerUser,SignIn,addToCart,getCartItems};
+const deleteCartItem=(id,jwt)=>axiosClient.delete('/user-carts/'+id,
+    {
+        headers:{
+            Authorization:'Bearer '+jwt
+        }
+    })
+
+
+
+export default { getMenuCategory, getProductList,getProductByCategory,registerUser,
+    SignIn,addToCart,getCartItems,deleteCartItem};
 
