@@ -2,7 +2,8 @@
 import GlobalApi from '@/app/_utilities/GlobalApi';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { ArrowBigRight, Router } from 'lucide-react';
+import { PayPalButtons } from '@paypal/react-paypal-js';
+import { ArrowBigRight, ListOrdered, Router } from 'lucide-react';
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from 'react';
 
@@ -20,6 +21,8 @@ function Checkout() {
   const [phone,setPhone]=useState();
   const [zip,setZip]=useState();
   const [address,setAddress]=useState();
+
+  const [totalAmount,setTotalAmount]=useState();
 
 
 
@@ -45,12 +48,17 @@ function Checkout() {
           cartItemList.forEach((element) => {
             total += element.amount; // Assuming 'amount' is a number
           });
+          setTotalAmount((total*0.9+15).toFixed(2))
           setSubTotal(total.toFixed(2));
         }, [cartItemList]);
 
     const calculateTotalAmount=()=>{
       const totalAmount = Subtotal*0.9+15;
       return totalAmount.toFixed(2)
+    }
+
+    const onApprove=(data)=>{
+      console.log(data);
     }
 
   return (
@@ -89,7 +97,23 @@ function Checkout() {
             <h2 className="font-bold flex justify-between">
               Total: <span>${calculateTotalAmount()}</span>
             </h2>
+     
             <Button>Payment <ArrowBigRight /></Button>
+            <PayPalButtons style={{ layout: "horizontal" }}
+            onApprove={onApprove}
+            createOrder={(data,actions)=>{
+             return actions.order.create({
+              purchase_units:[
+                {
+                  amount:{
+                    value:totalAmount,
+                    currency_code:'USD'
+                  }
+                }
+              ]
+            });
+            }}
+            />
           </div>
         </div>
       </div>

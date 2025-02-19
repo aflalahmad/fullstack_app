@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
   const [UpdateCart,setUpdateCart]=useState(false);
   const showHeader=params=='/sign-in'||params=='/create-account'?false:true;
   return (
-    <PayPalScriptProvider options={{ clientId: "test" }}>
+    <PayPalScriptProvider options={{ clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID }}>
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

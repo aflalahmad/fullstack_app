@@ -52,7 +52,7 @@ function Header() {
   useEffect(() => {
     getCartItems();
   }, [updateCart]);
-  
+
   const getMenuCategory = () => {
     GlobalApi.getMenuCategory().then((response) => {
       console.log("List", response.data.data);
@@ -92,7 +92,7 @@ function Header() {
     }, [cartItemList]);
 
   return (
-    <div className="flex p-2 gap-10 justify-between items-center shadow-2xl">
+    <div className="flex p-2 gap-10 justify-between items-center shadow-2xl position-sticky top-0  ">
       <div>
         <Image src="/images/logo.avif" alt="Next.js" width={65} height={65} />
       </div>
