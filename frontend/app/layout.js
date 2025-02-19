@@ -8,6 +8,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { UpdateCartContext } from "./_context/UpdateCartContext";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,9 +27,10 @@ const geistMono = Geist_Mono({
 
 export default function RootLayout({ children }) {
   const params =usePathname();
-  const[UpdateCart,setUpdateCart]=useState(false);
+  const [UpdateCart,setUpdateCart]=useState(false);
   const showHeader=params=='/sign-in'||params=='/create-account'?false:true;
   return (
+    <PayPalScriptProvider options={{ clientId: "test" }}>
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -42,5 +44,6 @@ export default function RootLayout({ children }) {
 
       </body>
     </html>
+    </PayPalScriptProvider>
   );
 }

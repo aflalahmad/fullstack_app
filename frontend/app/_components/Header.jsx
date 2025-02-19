@@ -25,6 +25,7 @@ import { useRouter } from "next/navigation";
 import { UpdateCartContext } from "../_context/UpdateCartContext";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
   SheetHeader,
@@ -47,9 +48,11 @@ function Header() {
   useEffect(() => {
     getMenuCategory();
   }, []);
+
   useEffect(() => {
     getCartItems();
   }, [updateCart]);
+  
   const getMenuCategory = () => {
     GlobalApi.getMenuCategory().then((response) => {
       console.log("List", response.data.data);
@@ -77,6 +80,16 @@ function Header() {
       getCartItems();
     });
   };
+
+  const [Subtotal, setSubTotal] = useState(0);
+  
+    useEffect(() => {
+      let total = 0;
+      cartItemList.forEach((element) => {
+        total += element.amount; // Assuming 'amount' is a number
+      });
+      setSubTotal(total.toFixed(2));
+    }, [cartItemList]);
 
   return (
     <div className="flex p-2 gap-10 justify-between items-center shadow-2xl">
@@ -143,6 +156,14 @@ function Header() {
                 />
               </SheetDescription>
             </SheetHeader>
+            <SheetClose asChild>
+              <div className="absolute w-[90%] bottom-6 flex flex-col">
+                <h2 className="text-lg font-bold flex justify-between">
+                  <span>${Subtotal}</span>
+                </h2>
+                <Button className="bg-teal-700" onClick={()=>router.push(jwt?'/checkout':'/sign-in')}>Checkout</Button>
+              </div>
+            </SheetClose>
           </SheetContent>
         </Sheet>
 

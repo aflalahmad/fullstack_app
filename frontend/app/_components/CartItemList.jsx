@@ -5,15 +5,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";  // Import the Image component from next/image
 
 function CartItemList({ cartItemList, onDeleteItem }) {
-  const [Subtotal, setSubTotal] = useState(0);
-
-  useEffect(() => {
-    let total = 0;
-    cartItemList.forEach((element) => {
-      total += element.amount; // Assuming 'amount' is a number
-    });
-    setSubTotal(total.toFixed(2));
-  }, [cartItemList]);
+  
 
   return (
     <div>
@@ -22,7 +14,7 @@ function CartItemList({ cartItemList, onDeleteItem }) {
           <div key={cart.id} className="flex justify-between items-center p-2 mb-5">
             <div className="flex gap-6 items-center">
               <Image
-                src={process.env.NEXT_PUBLIC_BACKEND_BASE_URL + cart.image[0]} // Make sure this is a valid URL
+               //src={process.env.NEXT_PUBLIC_BACKEND_BASE_URL + cart.image} // Make sure this is a valid URL
                 width={90}
                 height={90}
                 alt={cart.name}
@@ -41,12 +33,7 @@ function CartItemList({ cartItemList, onDeleteItem }) {
           </div>
         ))}
       </div>
-      <div className="absolute w-[90%] bottom-6 flex flex-col">
-        <h2 className="text-lg font-bold flex justify-between">
-          Subtotal<span>${Subtotal}</span>
-        </h2>
-        <Button className="bg-teal-700">View Cart</Button>
-      </div>
+      
     </div>
   );
 }
