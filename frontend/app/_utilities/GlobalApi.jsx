@@ -45,6 +45,9 @@ const addToCart=(data,jwt)=>axiosClient.post('/user-carts',data,{
 //         image:item.attributes.products?.data[0].attributes.images.data[0].attributes.url,
 //         actualPrice:item.attributes.products?.data[0].attributes.mrp,
 //         id:item.id
+   //        products:item.attributes.products?.data[0].id
+
+
 //     })
 // )
 //     return resp.data.data
@@ -65,8 +68,14 @@ const deleteCartItem=(id,jwt)=>axiosClient.delete('/user-carts/'+id,
         }
     })
 
+const createOrder=(data,jwt)=>axiosClient.post('/order',data,{
+    headers:{
+        Authorization:'Bearer '+jwt
+    }
+})
+
 
 
 export default { getMenuCategory, getProductList,getProductByCategory,registerUser,
-    SignIn,addToCart,getCartItems,deleteCartItem};
+    SignIn,addToCart,getCartItems,deleteCartItem,createOrder};
 
