@@ -64,11 +64,18 @@ function Checkout() {
         zip: zip,
         address: address,
         orderItemList: cartItemList,
+        userId:user.id
       },
     };
     GlobalApi.createOrder(payload, jwt).then((resp) => {
       console.log(resp);
       toast('Order Placed Successfully!');
+      cartItemList.forEach((item,index)=>{
+        GlobalApi.deleteCartItem(item.id).then(resp=>{
+
+        })
+      })
+      router.replace('/order-confirmation');
     });
   };
 
@@ -114,6 +121,7 @@ function Checkout() {
             </Button>
             {totalAmount > 15 && (
               <PayPalButtons
+              disabled={!(username&&email&&address&&zip)}
                 style={{ layout: "horizontal" }}
                 onApprove={onApprove}
                 createOrder={(data, actions) => {
