@@ -72,10 +72,25 @@ const createOrder=(data,jwt)=>axiosClient.post('/order',data,{
     headers:{
         Authorization:'Bearer '+jwt
     }
+});
+
+const getMyOrder=(userId,jwt)=>axiosClient.get('/orders?filters[userId][$eq]=6&populate[orderItemList][populate][product][populate][images]=url')
+.then(resp=>{
+    const response=resp.data.data;
+    const orderList=response.map(item=>({
+        id:item.id,
+        totalOrderAmount:item.attributes.totalOrderAmount,
+        paymentId:item.attributes.paymentId,
+        orderItemList:item.attributes.orderItemList
+
+    }));
+    return orderList;
 })
 
 
 
 export default { getMenuCategory, getProductList,getProductByCategory,registerUser,
-    SignIn,addToCart,getCartItems,deleteCartItem,createOrder};
+    SignIn,addToCart,getCartItems,deleteCartItem,createOrder,
+    getMyOrder
+};
 

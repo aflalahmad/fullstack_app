@@ -43,12 +43,12 @@ function Checkout() {
     cartItemList.forEach((element) => {
       total += element.amount; // Assuming 'amount' is a number
     });
-    setTotalAmount((total * 0.9 + 15).toFixed(2));
+    setTotalAmount((total / 0.9 + 15).toFixed(2));
     setSubTotal(total.toFixed(2));
   }, [cartItemList]);
 
   const calculateTotalAmount = () => {
-    const totalAmount = Subtotal * 0.9 + 15;
+    const totalAmount = Subtotal / 0.9 + 15;
     return totalAmount.toFixed(2);
   };
 
@@ -109,7 +109,7 @@ function Checkout() {
               Delivery: <span>$15.00</span>
             </h2>
             <h2 className="flex justify-between">
-              Tax (9%): <span>${(totalCartItem * 0.9).toFixed(2)}</span>
+              Tax (9%): <span>${(totalCartItem / 0.9).toFixed(2)}</span>
             </h2>
             <hr />
             <h2 className="font-bold flex justify-between">
