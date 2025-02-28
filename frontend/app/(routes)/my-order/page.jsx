@@ -38,7 +38,7 @@ function MyOrder() {
             <Collapsible>
           <CollapsibleTrigger>
           <div>
-            <h2>Order Date:</h2>
+            <h2>Order Date:{item?.createdAt}</h2>
           </div>
           </CollapsibleTrigger>
           <CollapsibleContent>

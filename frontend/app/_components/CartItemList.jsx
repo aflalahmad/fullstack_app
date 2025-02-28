@@ -14,7 +14,7 @@ function CartItemList({ cartItemList, onDeleteItem }) {
           <div key={cart.id} className="flex justify-between items-center p-2 mb-5">
             <div className="flex gap-6 items-center">
               <Image
-               //src={process.env.NEXT_PUBLIC_BACKEND_BASE_URL + cart.image} // Make sure this is a valid URL
+               src={`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}${cart.image? cart.image : `/${cart.image}`}`} // Make sure this is a valid URL
                 width={90}
                 height={90}
                 alt={cart.name}

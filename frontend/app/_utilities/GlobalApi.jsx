@@ -32,34 +32,28 @@ const addToCart=(data,jwt)=>axiosClient.post('/user-carts',data,{
     }
 });
 
-// const getCartItems=(userId,jwt)=>axiosClient.get('user-carts?filters[userId][$eq]='+userId+'&populate=*',{
-//     headers:{
-//         Authorization:'Bearer '+jwt
-//     }
-// }).then(resp=>{
-//     const data=resp.data.data;
-//     const cardItemList=data.map((Item,index)=>({
-//         name:item.attributes.products?.data[0].attributes.name,
-//         quantity:item.attributes.quantity,
-//         amount:item.attributes.amount,
-//         image:item.attributes.products?.data[0].attributes.images.data[0].attributes.url,
-//         actualPrice:item.attributes.products?.data[0].attributes.mrp,
-//         id:item.id
-   //        products:item.attributes.products?.data[0].id
-
-
-//     })
-// )
-//     return resp.data.data
-// });
-
-const getCartItems=(userId,jwt)=>axiosClient.get('user-carts?filters[userId][$eq]='+userId+'&populate=*',{
-    headers:{
-        Authorization:'Bearer '+jwt
+ const getCartItems=(userId,jwt)=>axiosClient.get('user-carts?filters[userId][$eq]='+userId+'&&populate[products][populate]=image',{
+  headers:{
+         Authorization:'Bearer '+jwt
     }
-}).then(resp=>{
-    return resp.data.data
-})
+ }).then(resp=>{
+    const data=resp.data.data;
+    const cardItemList=data.map((Item,index)=>({
+        name:item.attributes.products?.data[0].attributes.name,
+         quantity:item.attributes.quantity,
+        amount:item.attributes.amount,
+        image:item.attributes.products?.data[0].attributes.images.data[0].attributes.url,
+         actualPrice:item.attributes.products?.data[0].attributes.mrp,
+        id:item.id,
+           products:item.attributes.products?.data[0].id
+
+
+    })
+)
+return cartItemList
+     return resp.data.data
+ });
+
 
 const deleteCartItem=(id,jwt)=>axiosClient.delete('/user-carts/'+id,
     {
@@ -81,7 +75,8 @@ const getMyOrder=(userId,jwt)=>axiosClient.get('/orders?filters[userId][$eq]=6&p
         id:item.id,
         totalOrderAmount:item.attributes.totalOrderAmount,
         paymentId:item.attributes.paymentId,
-        orderItemList:item.attributes.orderItemList
+        orderItemList:item.attributes.orderItemList,
+        createdAt:item.attributes.createdAt
 
     }));
     return orderList;
